@@ -1,0 +1,1 @@
+default_app_config = 'Catalog.apps.CatalogConfig'  # Изменяем язык приложения в админке
