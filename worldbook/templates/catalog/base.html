@@ -49,6 +49,11 @@
             <div class="row text-center">
                 {% block content %}
                 {% endblock content %}
+                {#Paginator#}
+                <div class="col-12">
+                    {% include "modules/pagination.html" %}
+                </div>
+                {#Paginator#}
             </div>
         </div>
     </div>
