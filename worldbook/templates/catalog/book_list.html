@@ -1,0 +1,32 @@
+{% extends "catalog/base.html" %}
+{% block content %}
+    <div class="row text-center text-dark lh-2">
+        <h4>Список книг в БД</h4>
+    </div>
+    {% if books %}
+    <table class="table table-striped table-bordered text-start">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Aвтop</th>
+                <th>Жaнp</th>
+                <th>Обложка</th>
+                <th>Показать обложку</th>
+            </tr>
+        </thead>
+    <tbody>
+        {% for book in books %}
+            <tr>
+                <td><a href="{{ book.id }}">{{ book.title }}</a></td>
+                <td>{{ book.display_author }}</td>
+                <td>{{ book.genre }}</td>
+                <td><img src="{{ book.photo.url }}" alt="connect" style="max-height: 100px"></td>
+                <td><a href="{{ book.photo.url}}"  class="btn btn-primary"  target="_blank">Показать</a>
+            </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+    {% else %}
+    <p>В базе данных нет книг</p>
+    {% endif %}
+{% endblock content %}

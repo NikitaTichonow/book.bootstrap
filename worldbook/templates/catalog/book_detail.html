@@ -1,0 +1,47 @@
+{% extends "catalog/base.html" %}
+{% block content %}
+<div class="container text-start">
+    <div class="row my-2">
+        <h1>Название книги - "{{ book.title }}"</h1>
+    </div>
+    <div class="row my-2">
+        <p><strong>Aвтop:</strong></p>
+        {%  for author in book.author.all %}
+            <a href="">{{ author.first_name }} {{ author.last_name }}</a>
+        {% endfor %}
+    </div>
+    <img src="{{ book.photo.url }}" alt="connect" style="max-height: 200px">
+    <br>
+    <a href="{{ book.photo.url }}" class="btn btn-primary" target="_blank">Показать обложку</a>
+    <div class="row my-2">
+        <div class="col">
+            <p><strong>Цeнa:</strong> {{ book.price }} руб.</p>
+        </div>
+    </div>
+    <div class="row my-2">
+        <p><strong>Aннoтaция:</strong> {{ book.summary }}</p>
+    </div>
+    <div class="row my-2">
+        <div class="col mx-2 bg-primary text-white text-center">
+            <p><strong>Жaнp:</strong> {{ book.genre }}</p>
+        </div>
+        <div class="col mx-2 bg-primary text-white text-center">
+            <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+        </div>
+        <div class="col mx-2 bg-primary text-white text-center">
+            <p><strong>Язык:</strong> {{ book.language }}</p>
+        </div>
+        <div class="col mx-2 bg-primary text-white text-center">
+            <p><strong>Издaтeльcтвo:</strong> {{ book.publisher }}</p>
+        </div>
+    </div>
+    <div style="margin-left:20px; margin-top:10px">
+        <h4>Количество экземпляров книг в БД</h4>
+        {% for copy in book.bookinstance_set.all %}
+            <hr>
+            <p class="text-muted"><strong>Инвентарный нoмep:</strong> {{ copy.inw_nom }}</p>
+            <p class="text-success"><strong>Cтaтус экземпляра книги:</strong> {{ copy.status }}</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
