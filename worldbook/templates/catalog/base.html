@@ -38,7 +38,8 @@
         <div class="col-2">
             {% block sidebar %}
                 <nav class="nav flex-column">
-                    <a href="{% url 'index' %}" class="nav-link">Все книги</a>
+                    <a href="{% url 'index' %}" class="nav-link">Главная страница</a>
+                    <a href="{% url 'books' %}" class="nav-link">Все книги</a>
                     <a href="{% url 'index' %}" class="nav-link">Все авторы</a>
                     <a href="{% url 'index' %}" class="nav-link">Жанры</a>
                 </nav>
