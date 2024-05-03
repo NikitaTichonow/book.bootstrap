@@ -4,11 +4,37 @@
     <h5>{{ text_head }}</h5>
 {% endblock header %}
 {% block content %}
-    <div class="container-fluid my-2">
-        <div class="row">
+    <div class="container-fluid my-4 ">
+        <div class="row  text-dark mx2">
             <div class="col text-center">
-                <div>{{ text_body }}</div>
+                <p>Добро пожаловать на сайт <em>Мир книг</em>. Это очень простой веб-сайт, написанный на Django и
+                    Bootstrap. Разработан на Python в качестве учебного примера с использованием PyCharm.</p>
             </div>
         </div>
+        <div class="row text-center text-dark lh-2">
+            <h4>Сведения из базы данных</h4>
+        </div>
+        <div class="row my-4 text-dark">
+            <div class="col mx-2 bg-success">Количество книг - {{ num_books }}</div>
+            <div class="col mx-2 bg-success">Ha складе в наличии - {{ num_instances }}</div>
+            <div class="col mx-2 bg-success">Количество авторов - {{ num_authors }}</div>
+        </div>
+    <div class="row text-centre text-dark lh-2 ">
+        <h3>Книги</h3>
+    </div>
+    {% if num_books > 0 %}
+        <div class="row my-2 g-2 ">
+            {% for obj in books %}
+                <div class="card" style="width: 9rem">
+                    <img src="{{ obj.photo.url }}" class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text small">
+                            {{ obj.title }}, Цена: {{ obj.price }} руб.
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
     </div>
 {% endblock content %}
