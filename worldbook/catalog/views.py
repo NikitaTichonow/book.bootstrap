@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView
@@ -26,14 +27,45 @@ def index(request):
     return render(request, 'catalog/index.html', context)
 
 
+def about(request):
+    text_head = 'Сведения о компании'
+    name = '000 "Интелпектуальные информационные системы"'
+    rab1 = 'Разработка приложений на основе', 'систем искусственного интелпекта'
+    rab2 = 'Распознавание объектов дорожной инфраструктуры'
+    rab3 = 'Создание графических АРТ-объектов на основе', 'систем искусственного интелпекта'
+    rab4 =  'Создание цифровых интерактивных книг, учебных пособий','автоматизированных обучающих систем'
+    context = {'text head': text_head, 'name': name, 'rab1': rab1, 'rab2': rab2, 'rab3':rab3, 'rab4':rab4}
+    return render(request, 'catalog/about.html', context)
+
+
+def contact(request):
+    text_head = 'Контакты'
+    name = 'ООО "Интеллектуальные информационные системы"'
+    address = 'Москва, ул. Планерная, д. 20, к. 1'
+    tel = '495-345-45-45'
+    email = 'iis info@mail.ru'
+    context = {'text _ head': text_head,'name': name, 'address': address, 'tel': tel, 'email': email}
+    return render(request, 'catalog/contact.html', context)
+
+
 class BookListView(ListView):
     model = Book
     context_object_name = 'books'
     paginate_by = 2
-
+    ordering = ['-id']
 
 
 class BookDetailView(DetailView):
     model = Book
     context_object_name = 'book'
 
+
+class AuthorListView(ListView):
+    model = Author
+    paginate_by = 2
+    template_name = "catalog/author_list.html"
+    ordering = ['-id']
+
+
+class AuthorDetailView(DetailView):
+    model = Author

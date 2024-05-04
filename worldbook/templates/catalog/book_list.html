@@ -29,4 +29,10 @@
     {% else %}
     <p>В базе данных нет книг</p>
     {% endif %}
+    {#Paginator#}
+    <div class="col-12">
+        {% include "modules/pagination.html" %}
+    </div>
+    {#Paginator#}
+
 {% endblock content %}

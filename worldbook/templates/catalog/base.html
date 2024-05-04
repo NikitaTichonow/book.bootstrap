@@ -21,9 +21,9 @@
 <div class="container-fluid">
     <div class="row bg-success  text-center">
         <h6>
-            <a href="{% url 'index' %}">Главная страница</a>
-            <a href="{% url 'index' %}">О нас</a>
-            <a href="{% url 'index' %}">Контакты</a>
+            <a href="{% url 'catalog:index' %}">Главная страница</a>
+            <a href="{% url 'catalog:about' %}">О нас</a>
+            <a href="{% url 'catalog:contact' %}">Контакты</a>
         </h6>
     </div>
 </div>
@@ -38,10 +38,10 @@
         <div class="col-2">
             {% block sidebar %}
                 <nav class="nav flex-column">
-                    <a href="{% url 'index' %}" class="nav-link">Главная страница</a>
-                    <a href="{% url 'books' %}" class="nav-link">Все книги</a>
-                    <a href="{% url 'index' %}" class="nav-link">Все авторы</a>
-                    <a href="{% url 'index' %}" class="nav-link">Жанры</a>
+                    <a href="{% url 'catalog:index' %}" class="nav-link">Главная страница</a>
+                    <a href="{% url 'catalog:books' %}" class="nav-link">Все книги</a>
+                    <a href="{% url 'catalog:authors' %}" class="nav-link">Все авторы</a>
+                    <a href="{% url 'catalog:index' %}" class="nav-link">Жанры</a>
                 </nav>
             {% endblock sidebar %}
         </div>
@@ -50,9 +50,9 @@
                 {% block content %}
                 {% endblock content %}
                 {#Paginator#}
-                <div class="col-12">
-                    {% include "modules/pagination.html" %}
-                </div>
+{#                <div class="col-12">#}
+{#                    {% include "modules/pagination.html" %}#}
+{#                </div>#}
                 {#Paginator#}
             </div>
         </div>
