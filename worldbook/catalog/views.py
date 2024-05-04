@@ -1,4 +1,4 @@
-from django.core.paginator import Paginator
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView
@@ -18,12 +18,15 @@ def index(request):
     # Данные об авторах книг
     authors = Author.objects
     num_authors = Author.objects.count()
+    # Количество посещений этого view, подсчитанное в переменной session
+    num_visits = request.session.get('num_visits', 0)
+    request.session['num_visits'] = num_visits + 1
     # Словарь для передачи данных в шаблон index.html
     context = {'text head': text_head,
                'books': books, 'num_books': num_books,
                'num_instances': num_instances,
                'num_instances_available': num_instances_available,
-               'authors': authors, 'num_authors': num_authors}
+               'authors': authors, 'num_authors': num_authors, 'num_visits': num_visits}
     return render(request, 'catalog/index.html', context)
 
 
@@ -55,17 +58,20 @@ class BookListView(ListView):
     ordering = ['-id']
 
 
-class BookDetailView(DetailView):
+class BookDetailView(LoginRequiredMixin, DetailView):
+    raise_exception = True
     model = Book
     context_object_name = 'book'
 
 
-class AuthorListView(ListView):
+class AuthorListView(LoginRequiredMixin, ListView):
+    raise_exception = True
     model = Author
     paginate_by = 4
     template_name = "catalog/author_list.html"
     ordering = ['-id']
 
 
-class AuthorDetailView(DetailView):
+class AuthorDetailView(LoginRequiredMixin, DetailView):
+    raise_exception = True
     model = Author
