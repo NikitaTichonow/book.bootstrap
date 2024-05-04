@@ -1,0 +1,16 @@
+.carousel-item img {
+    width: 900px;
+    height: 700px;
+    border-radius: 20px;
+}
+
+.body {
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-lg {
+    min-height: 70vh;
+}

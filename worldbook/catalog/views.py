@@ -51,7 +51,7 @@ def contact(request):
 class BookListView(ListView):
     model = Book
     context_object_name = 'books'
-    paginate_by = 2
+    paginate_by = 4
     ordering = ['-id']
 
 
@@ -62,7 +62,7 @@ class BookDetailView(DetailView):
 
 class AuthorListView(ListView):
     model = Author
-    paginate_by = 2
+    paginate_by = 4
     template_name = "catalog/author_list.html"
     ordering = ['-id']
 
