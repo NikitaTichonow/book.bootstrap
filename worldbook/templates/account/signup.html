@@ -1,8 +1,29 @@
-{% extends "catalog/base.html" %}
+{% extends 'account/base.html' %}
+
 {% block content %}
-    <form method="post">
-{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Sing up">
-</form>
+    <form method="POST" novalidate>
+        {% csrf_token %}
+        <h2>Sign Up</h2>
+        {% for field in form %}
+            <p>
+                {% if field.errors %}
+                    <ul class="errorlist">
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {{ field.label_tag }} {{ field }}
+            </p>
+        {% endfor %}
+        <input type="submit" value="Register"/>
+        <br>
+        <a href="/">На главную страницу</a>
+        <br>
+        <a href="{% url 'account_login' %}">У меня уже есть страница на сайте, авторизоваться</a>
+        <br>
+        <a href="/">Политика конфиденциальности</a>
+
+    </form>
 {% endblock content %}
+

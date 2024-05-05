@@ -1,10 +1,12 @@
-{% extends "catalog/base.html" %}
-{% block content %}
-        <form method="post" action="{% url 'account_login' %}">
-    {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="login">
-        <input type="hidden" name="next" value="{{ next }}">
-    </form>
-{% endblock content %}
+{% extends 'account/base.html' %}
 
+{% block content %}
+<form method="POST" novalidate>
+	{% csrf_token %}
+	<h2>Login</h2>
+	{{form.as_p}}
+	<input type="submit" value="Login" />
+	<p>Don't have an account? <a href="{%url 'account_signup' %}">Register</a></p>
+</form>
+
+{% endblock content%}
