@@ -1,5 +1,14 @@
-{% extends 'catalog/base.html' %}
+{% extends 'account/base.html' %}
 
 {% block content %}
+    {% csrf_token %}
     <h1>Вы, действительно хотите выйти ?</h1>
+    <form action="/">
+        <input type="submit" value="Нет" />
+    </form>
+        <form action="{% url 'account_logout' %}">
+        <input type="submit" value="Да" />
+    </form>
+    <a href="/">На главную страницу</a>
+
 {% endblock content%}
