@@ -57,7 +57,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'worldbook.urls'
 
-TEMPLATE_DIR =os.path.join(BASE_DIR, 'templates')
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
 TEMPLATES = [
     {
@@ -70,7 +70,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -153,8 +153,8 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
-ADMINS = (
-    ('nik7674', 'nik7674@yandex.ru'),
-)
-
-EMAIL_SUBJECT_PREFIX = 'World Book'
+# ADMINS = (
+#     ('nik7674', 'nik7674@yandex.ru'),
+# )
+#
+# EMAIL_SUBJECT_PREFIX = 'World Book'

@@ -29,3 +29,28 @@
   fill: currentColor;
 }
 
+.i-am-centered {
+            margin: auto;
+            padding-top: 3%;
+        }
+
+.one {
+    padding-top: 3%;
+    color: black;
+}
+
+.form-group1 {
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+.form-group2 {
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+.btn {
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+}
