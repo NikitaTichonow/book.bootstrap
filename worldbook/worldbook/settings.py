@@ -144,6 +144,15 @@ EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = "nik7674@yandex.ru"
 SERVER_EMAIL = "nik7674@yandex.ru"
 
+ADMINS = (
+    ('nik7674', 'nik7674@yandex.ru'),
+)
+
+MANAGERS = (
+    ('Ivan', 'ivan@yandex.ru'),
+    ('Petr', 'petr@yandex.ru'),
+)
+
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
@@ -151,10 +160,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = 'none'
-
-# ADMINS = (
-#     ('nik7674', 'nik7674@yandex.ru'),
-# )
-#
-# EMAIL_SUBJECT_PREFIX = 'World Book'
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True # позволит избежать дополнительного входа и активирует аккаунт сразу, как только мы перейдём по ссылке
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1 # хранит количество дней, когда доступна ссылка на подтверждение регистрации.
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+EMAIL_SUBJECT_PREFIX = 'World Book'
