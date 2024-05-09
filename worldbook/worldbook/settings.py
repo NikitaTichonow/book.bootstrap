@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.yandex',
+    'allauth.socialaccount.providers.github',
 ]
 
 SITE_ID = 1

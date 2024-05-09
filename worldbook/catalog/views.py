@@ -12,8 +12,6 @@ from .models import Book, Author, BookInstance, Genre, Subscription
 
 
 
-
-
 def index(request):
     text_head = 'На нашем сайте вы можете nолучить книги в электронном виде'
     # Данные о книгах и их количестве
@@ -77,7 +75,7 @@ def subscriptions(request):
         elif action == 'unsubscribe':
             Subscription.objects.filter(
                 user=request.user,
-                genre=genre,
+                genre=genres,
             ).delete()
 
     genre_with_subscriptions = Genre.objects.annotate(
