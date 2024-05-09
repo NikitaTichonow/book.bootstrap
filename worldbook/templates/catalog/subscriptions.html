@@ -1,0 +1,20 @@
+{% extends "catalog/base.html" %}
+
+
+{% block content %}
+    {% for genre in genre  %}
+            {{ genre.name }}
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="genre_id" value="{{ genre.id }}" />
+
+                {% if genre.user_subscribed %}
+                    <button disabled>Подписаться</button>
+                    <button name="action" value="unsubscribe">Отписаться</button>
+                {% else %}
+                    <button name="action" value="subscribe">Подписаться</button>
+                    <button disabled>Отписаться</button>
+                {% endif %}
+            </form>
+    {% endfor %}
+{% endblock content %}

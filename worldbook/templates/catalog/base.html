@@ -30,13 +30,16 @@
                     <a class="nav-link" href="{% url 'catalog:authors' %}">Авторы</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Жанры</a>
+                    <a class="nav-link" href="{% url 'catalog:genre' %}">Жанры</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'catalog:about' %}">О нас</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'catalog:contact' %}">Контакты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'catalog:subscriptions' %}">Подписки</a>
                 </li>
                 <li class="nav-item dropdown ">
                     <a class="nav-link dropdown-toggle text-lg-end" href="#" id="navbarDropdown" role="button"

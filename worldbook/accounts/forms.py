@@ -1,8 +1,9 @@
-from allauth.socialaccount.providers.dummy.views import authenticate
 from django import forms
 from allauth.account.forms import SignupForm
 from django.contrib.auth.models import Group
 from django.core.mail import EmailMultiAlternatives, mail_admins, mail_managers
+from django.contrib.auth.models import User
+
 
 
 class CustomSignupForm(SignupForm):

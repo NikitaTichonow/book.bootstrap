@@ -1,9 +1,17 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db import transaction
+from django.db.models import Exists, OuterRef
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.views.generic import ListView, DetailView
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse_lazy, reverse
+from django.views.decorators.csrf import csrf_protect
+from django.views.generic import ListView, DetailView, UpdateView
 
-from .models import Book, Author, BookInstance
+from .models import Book, Author, BookInstance, Genre, Subscription
+
+
+
 
 
 def index(request):
@@ -51,6 +59,43 @@ def contact(request):
     return render(request, 'catalog/contact.html', context)
 
 
+def genre(request):
+    genre = Genre.objects.all()
+    return render(request, 'catalog/genre.html', {'genre': genre})
+
+
+@login_required
+@csrf_protect
+def subscriptions(request):
+    if request.method == 'POST':
+        genre_id = request.POST.get('genre_id')
+        genres = Genre.objects.get(id=genre_id)
+        action = request.POST.get('action')
+
+        if action == 'subscribe':
+            Subscription.objects.create(user=request.user, genre=genres)
+        elif action == 'unsubscribe':
+            Subscription.objects.filter(
+                user=request.user,
+                genre=genre,
+            ).delete()
+
+    genre_with_subscriptions = Genre.objects.annotate(
+        user_subscribed=Exists(
+            Subscription.objects.filter(
+                user=request.user,
+
+            )
+        )
+    )
+    return render(
+        request,
+        'catalog/subscriptions.html',
+        {'genre': genre_with_subscriptions},
+    )
+
+
+
 class BookListView(ListView):
     model = Book
     context_object_name = 'books'
@@ -75,3 +120,6 @@ class AuthorListView(LoginRequiredMixin, ListView):
 class AuthorDetailView(LoginRequiredMixin, DetailView):
     raise_exception = True
     model = Author
+
+
+

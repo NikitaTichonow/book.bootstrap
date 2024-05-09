@@ -1,0 +1,6 @@
+{% extends "catalog/base.html" %}
+{% block content %}
+    {% for genre in genre  %}
+        {{ genre.name }}
+    {% endfor %}
+{% endblock content %}

@@ -29,7 +29,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'widget_tweaks',
+    'django_filters',
+
 
     'catalog',
     'accounts',
@@ -160,7 +161,6 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_CONFIRM_EMAIL_ON_GET = True # позволит избежать дополнительного входа и активирует аккаунт сразу, как только мы перейдём по ссылке
-ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1 # хранит количество дней, когда доступна ссылка на подтверждение регистрации.
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+
 EMAIL_SUBJECT_PREFIX = 'World Book'
