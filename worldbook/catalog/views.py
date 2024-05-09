@@ -3,10 +3,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
 from django.db.models import Exists, OuterRef
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
-from django.urls import reverse_lazy, reverse
+from django.shortcuts import get_object_or_404
+from django.http import Http404
 from django.views.decorators.csrf import csrf_protect
-from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import ListView, DetailView, UpdateView, TemplateView
+from jazzmin.templatetags.jazzmin import User
 
 from .models import Book, Author, BookInstance, Genre, Subscription
 
@@ -58,8 +59,8 @@ def contact(request):
 
 
 def genre(request):
-    genre = Genre.objects.all()
-    return render(request, 'catalog/genre.html', {'genre': genre})
+    genres = Genre.objects.all()
+    return render(request, 'catalog/genre.html', {'genre': genres})
 
 
 @login_required
@@ -67,22 +68,21 @@ def genre(request):
 def subscriptions(request):
     if request.method == 'POST':
         genre_id = request.POST.get('genre_id')
-        genres = Genre.objects.get(id=genre_id)
+        genre = Genre.objects.get(id=genre_id)
         action = request.POST.get('action')
 
         if action == 'subscribe':
-            Subscription.objects.create(user=request.user, genre=genres)
+            Subscription.objects.create(user=request.user, genre=genre)
         elif action == 'unsubscribe':
             Subscription.objects.filter(
                 user=request.user,
-                genre=genres,
+                genre=genre,
             ).delete()
 
     genre_with_subscriptions = Genre.objects.annotate(
         user_subscribed=Exists(
             Subscription.objects.filter(
                 user=request.user,
-
             )
         )
     )

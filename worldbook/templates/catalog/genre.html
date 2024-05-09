@@ -1,6 +1,28 @@
 {% extends "catalog/base.html" %}
+
 {% block content %}
-    {% for genre in genre  %}
-        {{ genre.name }}
-    {% endfor %}
+    {% if genre %}
+        <table class="table table-striped table-bordered text-start">
+            <thead>
+            <tr>
+                <th>Название</th>
+                <th>Описание</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for genre in genre %}
+                <tr>
+                    <td>{{ genre.name }}</td>
+                    <td>{{ genre.about }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>В базе данных нет книг</p>
+    {% endif %}
+    {#Paginator#}
+    <div class="col-12">
+        {% include "modules/pagination.html" %}
+    </div>
 {% endblock content %}

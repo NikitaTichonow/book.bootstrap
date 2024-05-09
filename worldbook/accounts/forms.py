@@ -5,7 +5,6 @@ from django.core.mail import EmailMultiAlternatives, mail_admins, mail_managers
 from django.contrib.auth.models import User
 
 
-
 class CustomSignupForm(SignupForm):
     first_name = forms.CharField(max_length=30, label='Ваше имя')
     last_name = forms.CharField(max_length=30, label='Ваша фамилия')

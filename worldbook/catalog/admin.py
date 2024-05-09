@@ -23,6 +23,7 @@ class BooksInstanceInline(admin.TabularInline):
     model = BookInstance
 
 
+
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
     list_display = ('title', 'display_author', 'genre', 'language', 'get_image')

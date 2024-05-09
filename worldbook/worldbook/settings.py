@@ -22,6 +22,7 @@ ALLOWED_HOSTS = []
 
 
 INSTALLED_APPS = [
+    # 'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -30,6 +31,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django_filters',
+
+    "debug_toolbar",
 
 
     'catalog',
@@ -55,6 +58,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "allauth.account.middleware.AccountMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+]
+
+INTERNAL_IPS = [
+    "127.0.0.1",
 ]
 
 ROOT_URLCONF = 'worldbook.urls'
@@ -165,3 +173,17 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 EMAIL_SUBJECT_PREFIX = 'World Book'
+
+
+# Админпанель и ее кастомизация с помощью JAZZMIN
+
+# JAZZMIN_UI_TWEAKS = {
+#     "theme": "journal",
+#     "sticky_actions": True,
+#     "actions_sticky_top": True,
+# }
+# JAZZMIN_SETTINGS = {
+#     "site_title": "World Book",
+#     "site_brand": "World Book",
+# }
+#

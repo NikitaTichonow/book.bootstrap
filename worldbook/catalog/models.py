@@ -1,14 +1,13 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-
-# Create your models here.
 from django.urls import reverse
 
 
 # модель жанры книг
 class Genre(models.Model):
     name = models.CharField(max_length=200, help_text="Введите жанр книги", verbose_name="Жанр книги")
+    about = models.TextField(help_text="Введите сведения о жанре", verbose_name="Сведения о жанре", null=True)
 
     def __str__(self):
         return self.name
@@ -96,7 +95,7 @@ class Subscription(models.Model):
         on_delete=models.CASCADE,
         related_name='subscriptions',
     )
-    category = models.ForeignKey(
+    genre = models.ForeignKey(
         to='Genre',
         on_delete=models.CASCADE,
         related_name='subscriptions',
