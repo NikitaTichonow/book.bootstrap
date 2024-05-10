@@ -1,8 +1,9 @@
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
-
 from django.urls import reverse
 
+Users = settings.AUTH_USER_MODEL
 
 # модель жанры книг
 class Genre(models.Model):
@@ -87,18 +88,3 @@ class BookInstance(models.Model):
 
     def __str__(self):
         return '%s %s %s' % (self.inw_nom, self.book, self.status)
-
-
-class Subscription(models.Model):
-    user = models.ForeignKey(
-        to=User,
-        on_delete=models.CASCADE,
-        related_name='subscriptions',
-    )
-    genre = models.ForeignKey(
-        to='Genre',
-        on_delete=models.CASCADE,
-        related_name='subscriptions',
-    )
-
-

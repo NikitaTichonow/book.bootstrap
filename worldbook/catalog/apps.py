@@ -6,4 +6,4 @@ class CatalogConfig(AppConfig):
     name = 'catalog'
 
     def ready(self):
-        from . import signals  # выполнение модуля -> регистрация сигналов
+        from .import signals  # выполнение модуля -> регистрация сигналов

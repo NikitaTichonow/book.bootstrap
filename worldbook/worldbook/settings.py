@@ -34,9 +34,9 @@ INSTALLED_APPS = [
 
     "debug_toolbar",
 
-
     'catalog',
     'accounts',
+
 
     'django_cleanup.apps.CleanupConfig',
 
@@ -173,6 +173,9 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 EMAIL_SUBJECT_PREFIX = 'World Book'
+
+
+
 
 
 # Админпанель и ее кастомизация с помощью JAZZMIN

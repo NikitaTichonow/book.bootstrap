@@ -35,8 +35,6 @@ class BookAdmin(admin.ModelAdmin):
     get_image.short_description = 'Изображение'
 
 
-
-
 admin.site.register(Genre)
 admin.site.register(Language)
 admin.site.register(Publisher)

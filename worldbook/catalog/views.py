@@ -7,9 +7,8 @@ from django.shortcuts import get_object_or_404
 from django.http import Http404
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic import ListView, DetailView, UpdateView, TemplateView
-from jazzmin.templatetags.jazzmin import User
 
-from .models import Book, Author, BookInstance, Genre, Subscription
+from .models import Book, Author, BookInstance, Genre
 
 
 
@@ -61,37 +60,6 @@ def contact(request):
 def genre(request):
     genres = Genre.objects.all()
     return render(request, 'catalog/genre.html', {'genre': genres})
-
-
-@login_required
-@csrf_protect
-def subscriptions(request):
-    if request.method == 'POST':
-        genre_id = request.POST.get('genre_id')
-        genre = Genre.objects.get(id=genre_id)
-        action = request.POST.get('action')
-
-        if action == 'subscribe':
-            Subscription.objects.create(user=request.user, genre=genre)
-        elif action == 'unsubscribe':
-            Subscription.objects.filter(
-                user=request.user,
-                genre=genre,
-            ).delete()
-
-    genre_with_subscriptions = Genre.objects.annotate(
-        user_subscribed=Exists(
-            Subscription.objects.filter(
-                user=request.user,
-            )
-        )
-    )
-    return render(
-        request,
-        'catalog/subscriptions.html',
-        {'genre': genre_with_subscriptions},
-    )
-
 
 
 class BookListView(ListView):
