@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-   <meta charset="UTF-8">
-   <title>Кажется, у Вас нет доступа к данной странице...</title>
-</head>
-<body>
-   Кажется, у Вас нет доступа к данной странице... может попытаешься еще раз ?
-</body>
-</html>
+{% extends "catalog/base.html" %}
+{% block content %}
+    <br>
+    <br>
+    <br>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ error_message }} | <a href="{% url 'catalog:index' %}"><strong>Вернуться на главную</strong></a>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endblock %}
