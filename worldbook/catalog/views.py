@@ -12,7 +12,6 @@ from .serializers import *
 from .models import *
 
 
-
 def index(request):
     text_head = 'На нашем сайте вы можете nолучить книги в электронном виде'
     # Данные о книгах и их количестве
@@ -58,17 +57,13 @@ def contact(request):
     return render(request, 'catalog/contact.html', context)
 
 
-
 class GenreListView(LoginRequiredMixin, ListView):
     raise_exception = True
     model = Genre
+    context_object_name = 'genre'
     template_name = 'catalog/genre.html'
-
-
-# def genre(request):
-#     genres = Genre.objects.all()
-#     serializer_class = GenreSerializer
-#     return render(request, 'catalog/genre.html', {'genre': genres})
+    paginate_by = 4
+    ordering = ['-id']
 
 
 class BookListView(LoginRequiredMixin, ListView):
@@ -98,26 +93,29 @@ class AuthorDetailView(LoginRequiredMixin, DetailView):
     model = Author
 
 
+# API, django REST
 class AuthorsAPIView(generics.ListAPIView):
-   queryset = Author.objects.all()
-   serializer_class = AuthorsSerializer
-   permission_classes = [permissions.IsAuthenticated]
+    queryset = Author.objects.all()
+    serializer_class = AuthorsSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
 
 class BooksAPIView(generics.ListAPIView):
-   queryset = Book.objects.all()
-   serializer_class = BooksSerializer
-   permission_classes = [permissions.IsAuthenticated]
+    queryset = Book.objects.all()
+    serializer_class = BooksSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
 
 class GenresAPIView(generics.ListAPIView):
-   queryset = Genre.objects.all()
-   serializer_class = GenresSerializer
-   permission_classes = [permissions.IsAuthenticated]
+    queryset = Genre.objects.all()
+    serializer_class = GenresSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
 
 class UserAPIView(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
-
 
 
 # Обработка ошибок

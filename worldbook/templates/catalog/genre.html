@@ -1,8 +1,11 @@
 {% extends "catalog/base.html" %}
-
 {% block content %}
     {% if genre %}
         <table class="table table-striped table-bordered text-start">
+            <br>
+            <br>
+            <h1>Название и описание жанров литературы</h1>
+            <br>
             <thead>
             <tr>
                 <th>Название</th>
@@ -19,7 +22,7 @@
             </tbody>
         </table>
     {% else %}
-        <p>В базе данных нет книг</p>
+        <p>В базе данных нет жанров</p>
     {% endif %}
     {#Paginator#}
     <div class="col-12">
