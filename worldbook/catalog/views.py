@@ -1,15 +1,15 @@
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db import transaction
-from django.db.models import Exists, OuterRef
+
 from django.shortcuts import render
-from django.shortcuts import get_object_or_404
-from django.http import Http404
-from django.views.decorators.csrf import csrf_protect
+
 from django.views.generic import ListView, DetailView, UpdateView, TemplateView
-
+from rest_framework.response import Response
 from .models import Book, Author, BookInstance, Genre
-
+from django.shortcuts import render
+from rest_framework import viewsets, generics
+from rest_framework import permissions
+from .serializers import *
+from .models import *
 
 
 def index(request):
@@ -42,8 +42,8 @@ def about(request):
     rab1 = 'Разработка приложений на основе', 'систем искусственного интелпекта'
     rab2 = 'Распознавание объектов дорожной инфраструктуры'
     rab3 = 'Создание графических АРТ-объектов на основе', 'систем искусственного интелпекта'
-    rab4 =  'Создание цифровых интерактивных книг, учебных пособий','автоматизированных обучающих систем'
-    context = {'text head': text_head, 'name': name, 'rab1': rab1, 'rab2': rab2, 'rab3':rab3, 'rab4':rab4}
+    rab4 = 'Создание цифровых интерактивных книг, учебных пособий', 'автоматизированных обучающих систем'
+    context = {'text head': text_head, 'name': name, 'rab1': rab1, 'rab2': rab2, 'rab3': rab3, 'rab4': rab4}
     return render(request, 'catalog/about.html', context)
 
 
@@ -53,13 +53,20 @@ def contact(request):
     address = 'Москва, ул. Планерная, д. 20, к. 1'
     tel = '495-345-45-45'
     email = 'iis info@mail.ru'
-    context = {'text _ head': text_head,'name': name, 'address': address, 'tel': tel, 'email': email}
+    context = {'text _ head': text_head, 'name': name, 'address': address, 'tel': tel, 'email': email}
     return render(request, 'catalog/contact.html', context)
 
 
-def genre(request):
-    genres = Genre.objects.all()
-    return render(request, 'catalog/genre.html', {'genre': genres})
+
+class GenreListView(ListView):
+    model = Genre
+    template_name = 'catalog/genre.html'
+
+
+# def genre(request):
+#     genres = Genre.objects.all()
+#     serializer_class = GenreSerializer
+#     return render(request, 'catalog/genre.html', {'genre': genres})
 
 
 class BookListView(ListView):
@@ -88,4 +95,23 @@ class AuthorDetailView(LoginRequiredMixin, DetailView):
     model = Author
 
 
+class AuthorsAPIView(generics.ListAPIView):
+   queryset = Author.objects.all()
+   serializer_class = AuthorsSerializer
+   permission_classes = [permissions.IsAuthenticated]
+
+class BooksAPIView(generics.ListAPIView):
+   queryset = Book.objects.all()
+   serializer_class = BooksSerializer
+   permission_classes = [permissions.IsAuthenticated]
+
+class GenresAPIView(generics.ListAPIView):
+   queryset = Genre.objects.all()
+   serializer_class = GenresSerializer
+   permission_classes = [permissions.IsAuthenticated]
+
+class UserAPIView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
